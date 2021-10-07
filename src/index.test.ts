@@ -5,7 +5,7 @@ test("an example test", () => {
 });
 
 test("make sure test polyfills for fetch api work", () => {
-  const url = "http://workers.cloudflare.com/";
+  const url = "https://workers.cloudflare.com/";
   const req = new Request(url);
   expect(req.url).toBe(url);
 });

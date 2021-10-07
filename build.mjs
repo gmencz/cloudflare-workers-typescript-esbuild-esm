@@ -1,11 +1,17 @@
 import { build } from "esbuild";
 
 build({
-  entryPoints: ["src/index.ts"],
-  outdir: "dist",
+  bundle: true,
   format: "esm",
-  outExtension: {
-    ".js": ".mjs"
-  },
-  bundle: true
-}).catch(() => process.exit(1));
+  mainFields: ["browser", "module", "main"],
+  platform: "neutral",
+  target: "es2020",
+  entryPoints: ["./src/index.ts"],
+  outfile: "./dist/worker.mjs",
+  sourcemap: false,
+  charset: "utf8",
+  minify: process.env.NODE_ENV === "production" ? true : false
+}).catch(err => {
+  console.error(err.stack);
+  process.exitCode = 1;
+});
